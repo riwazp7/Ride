@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BookScreenController.swift
 //  Ride
 //
 //  Created by Riwaz Poudyal on 1/25/18.
@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -16,12 +15,9 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view, typically from a nib.
     }
 
-
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
     }
-
-
 
 }
