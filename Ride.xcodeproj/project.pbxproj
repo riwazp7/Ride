@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		4B50D1134E734957AC14D7CD /* RideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B50DC9C0ED5551AB22CD8D6 /* RideUITests.swift */; };
-		4B50D23A8B0A01B904E19D71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B50DB498B74FACC028B159F /* ViewController.swift */; };
+		4B50D23A8B0A01B904E19D71 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B50DB498B74FACC028B159F /* MainScreenViewController.swift */; };
 		4B50D3A8A2359A6838093741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B50D0892CC946DC1A2338C7 /* Main.storyboard */; };
 		4B50D774BEA748C2EC0F8351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B50D2B7C2C462BF12251A13 /* Assets.xcassets */; };
 		4B50D8A6C1F98B595ECB27F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B50D9844CE2E28DF017860A /* AppDelegate.swift */; };
 		4B50D8DB29A98347AE522932 /* Ride.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B50DEA11BE90D3D3431E618 /* Ride.xcdatamodeld */; };
 		4B50DA73A2545C66FB93CC4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B50D0EB08E1FC75A53B6030 /* LaunchScreen.storyboard */; };
 		4B50DD4D4683B9AC0AE3DB88 /* RideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B50D685354C11BAE09E4514 /* RideTests.swift */; };
+		D9165AC320215B04008CE1AE /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9165AC220215B04008CE1AE /* RideDetailsViewController.swift */; };
+		D9165AC520215C28008CE1AE /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9165AC420215C28008CE1AE /* Test.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +49,10 @@
 		4B50D9844CE2E28DF017860A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B50DA57B9B00ABDCC0E6E0E /* Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ride.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B50DAFB8309E643CF23202F /* RideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B50DB498B74FACC028B159F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4B50DB498B74FACC028B159F /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		4B50DC9C0ED5551AB22CD8D6 /* RideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideUITests.swift; sourceTree = "<group>"; };
+		D9165AC220215B04008CE1AE /* RideDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailsViewController.swift; sourceTree = "<group>"; };
+		D9165AC420215C28008CE1AE /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +127,9 @@
 				4B50D9844CE2E28DF017860A /* AppDelegate.swift */,
 				4B50DEA11BE90D3D3431E618 /* Ride.xcdatamodeld */,
 				4B50D0892CC946DC1A2338C7 /* Main.storyboard */,
-				4B50DB498B74FACC028B159F /* ViewController.swift */,
+				D9165AC420215C28008CE1AE /* Test.storyboard */,
+				D9165AC220215B04008CE1AE /* RideDetailsViewController.swift */,
+				4B50DB498B74FACC028B159F /* MainScreenViewController.swift */,
 			);
 			path = Ride;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 			files = (
 				4B50D774BEA748C2EC0F8351 /* Assets.xcassets in Resources */,
 				4B50DA73A2545C66FB93CC4F /* LaunchScreen.storyboard in Resources */,
+				D9165AC520215C28008CE1AE /* Test.storyboard in Resources */,
 				4B50D3A8A2359A6838093741 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,7 +268,8 @@
 			files = (
 				4B50D8A6C1F98B595ECB27F7 /* AppDelegate.swift in Sources */,
 				4B50D8DB29A98347AE522932 /* Ride.xcdatamodeld in Sources */,
-				4B50D23A8B0A01B904E19D71 /* ViewController.swift in Sources */,
+				4B50D23A8B0A01B904E19D71 /* MainScreenViewController.swift in Sources */,
+				D9165AC320215B04008CE1AE /* RideDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +514,7 @@
 				4B50DEACEFE7DA34A333ED48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B50DDFE2DD0CA3D2F0DA8B6 /* Build configuration list for PBXNativeTarget "RideUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +523,7 @@
 				4B50DF0E08CB52F652C48870 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B50DF6741A85AE669FCAF2D /* Build configuration list for PBXNativeTarget "RideTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +532,7 @@
 				4B50DC2A5E4B39A103B125EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
