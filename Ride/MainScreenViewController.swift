@@ -10,15 +10,21 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
-    @IBOutlet weak var requestButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestButton.layer.cornerRadius = 8
     }
 
     override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsScreen")
+        sleep(1)
+        self.present(nextViewController, animated: true, completion: nil)
     }
 }
