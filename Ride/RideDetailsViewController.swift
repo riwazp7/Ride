@@ -9,20 +9,13 @@
 import UIKit
 
 class RideDetailsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 0
-    }
-    
-    
-    @IBOutlet weak var fromDestination: UIPickerView!
-    @IBOutlet weak var toDestination: UIPickerView!
     
     var fromDestinationData: [String] = ["Prospect", "Morgan", "Williamstown", "Albany"]
     var toDestinationData: [String] = ["Williamstown", "Albany", "New York", "Pittsfield"]
+    
+    @IBOutlet weak var fromDestination: UIPickerView!
+    @IBOutlet weak var toDestination: UIPickerView!
+    @IBOutlet weak var requestRideButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,27 +24,28 @@ class RideDetailsViewController: UIViewController, UIPickerViewDelegate, UIPicke
         fromDestination.delegate = self
         toDestination.delegate = self
         
-        // The number of columns of data
-        func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-            return 1
-        }
+        requestRideButton.layer.cornerRadius = 8
         
-        // The number of rows of data
-        func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            if pickerView == fromDestination {
-                return fromDestinationData.count
-            } else {
-                return toDestinationData.count
-            }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == fromDestination {
+            return fromDestinationData.count
+        } else {
+            return toDestinationData.count
         }
-        
-        // The data to return for the row and component (column) that's being passed in
-        func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            if pickerView == fromDestination {
-                return fromDestinationData[row]
-            } else {
-                return toDestinationData[row]
-            }
+    }
+    
+    // The data to return for the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == fromDestination {
+            return fromDestinationData[row]
+        } else {
+            return toDestinationData[row]
         }
     }
     
