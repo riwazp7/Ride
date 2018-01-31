@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Get A Ride!-->
+        <!--View Controller-->
         <scene sceneID="qoe-jS-XHF">
             <objects>
                 <viewController id="oMY-Ix-hPj" sceneMemberID="viewController">
@@ -18,40 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="2bm-zr-8NU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="381"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-screen-2 (2)" translatesAutoresizingMaskIntoConstraints="NO" id="kyE-39-fx1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0u-Xw-DTh">
-                                <rect key="frame" x="110" y="550" width="154" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.29803921570000003" green="0.34509803919999998" blue="0.43529411759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                <color key="tintColor" red="0.93851198189999996" green="0.93851198189999996" blue="0.93851198189999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Request">
-                                    <color key="titleColor" red="0.79607843137254897" green="0.77254901960784317" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RZt-Xr-2tr" kind="show" id="3cI-Zl-fiI"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ride!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DZ-Gh-sKv">
-                                <rect key="frame" x="124" y="96" width="126" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
-                                <color key="textColor" cyan="0.2178559027777778" magenta="0.0908203125" yellow="0.0" black="0.01" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4e-2z-uuv">
+                                <rect key="frame" x="68" y="251" width="239" height="164"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2bm-zr-8NU" firstAttribute="leading" secondItem="bgc-H9-8jf" secondAttribute="leading" id="A2d-Nz-uyJ"/>
-                            <constraint firstItem="bgc-H9-8jf" firstAttribute="bottom" secondItem="2bm-zr-8NU" secondAttribute="bottom" constant="222" id="GuA-5Q-9VY"/>
-                            <constraint firstItem="2bm-zr-8NU" firstAttribute="trailing" secondItem="bgc-H9-8jf" secondAttribute="trailing" id="HTq-3V-UV3"/>
-                            <constraint firstItem="2bm-zr-8NU" firstAttribute="top" secondItem="bgc-H9-8jf" secondAttribute="top" id="iEg-Ti-PAm"/>
+                            <constraint firstItem="bgc-H9-8jf" firstAttribute="bottom" secondItem="Y4e-2z-uuv" secondAttribute="bottom" constant="252" id="3nW-5O-Es1"/>
+                            <constraint firstItem="Y4e-2z-uuv" firstAttribute="leading" secondItem="bgc-H9-8jf" secondAttribute="leading" constant="68" id="Gfq-qh-yz9"/>
+                            <constraint firstItem="kyE-39-fx1" firstAttribute="top" secondItem="bgc-H9-8jf" secondAttribute="top" id="GvU-7w-35q"/>
+                            <constraint firstItem="kyE-39-fx1" firstAttribute="trailing" secondItem="bgc-H9-8jf" secondAttribute="trailing" id="LBT-hS-2Yc"/>
+                            <constraint firstItem="bgc-H9-8jf" firstAttribute="trailing" secondItem="Y4e-2z-uuv" secondAttribute="trailing" constant="68" id="XrX-1s-H4E"/>
+                            <constraint firstItem="kyE-39-fx1" firstAttribute="leading" secondItem="bgc-H9-8jf" secondAttribute="leading" id="gxg-ga-SJH"/>
+                            <constraint firstItem="kyE-39-fx1" firstAttribute="bottom" secondItem="bgc-H9-8jf" secondAttribute="bottom" id="lkg-dG-rA7"/>
+                            <constraint firstItem="Y4e-2z-uuv" firstAttribute="top" secondItem="bgc-H9-8jf" secondAttribute="top" constant="187" id="yT7-4I-gHU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bgc-H9-8jf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Get A Ride!" id="QCB-R9-Nkl"/>
+                    <navigationItem key="navigationItem" id="QCB-R9-Nkl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drD-ey-Wpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -108,6 +95,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="540" height="540"/>
+        <image name="launch-screen-2 (2)" width="946" height="1194"/>
+        <image name="logo-1" width="516" height="425"/>
     </resources>
 </document>
