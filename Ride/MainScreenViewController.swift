@@ -21,9 +21,11 @@ class MainScreenViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // We want "launch screen" to appear for 1 second, and then switch to
+        // booking details screen
         super.viewDidAppear(animated)
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "DetailsScreen")
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "InitialNavigationView")
         sleep(1)
         self.present(nextViewController, animated: true, completion: nil)
     }
