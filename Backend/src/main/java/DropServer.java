@@ -1,15 +1,17 @@
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DropServer {
 
-    private static final Logger logger = Logger.getLogger(DropServer.class.getSimpleName());
+    private final static Logger logger = LoggerFactory.getLogger(DropServer.class.getSimpleName());
 
     public static void main(String[] args) {
         while(true) {
             try {
                 DropServer.newServer().start();
+                logger.info("Started Drop Server");
             } catch (RuntimeException e) {
-                logger.severe(e.toString());
+                logger.error("Fatal: Application stopped with an error", e);
             }
         }
     }
@@ -19,7 +21,6 @@ public class DropServer {
     }
 
     private DropServer() {
-
     }
 
     public void start() {
