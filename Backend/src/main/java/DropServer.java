@@ -10,29 +10,32 @@ public class DropServer {
 
         // log4j basic configuration; replace later
         BasicConfigurator.configure();
-
         while(true) {
             try {
                 DropServer.newServer().start();
                 logger.info("Started Drop Server");
                 Thread.sleep(Long.MAX_VALUE);
             } catch (RuntimeException e) {
-                logger.error("Fatal: Application stopped with an error", e);
+                logger.error("SERVER STOPPED WITH A FATAL ERROR", e);
             }
         }
     }
 
     public static DropServer newServer() {
-        return new DropServer(EndpointHandler.getEndpointHandler());
+        return new DropServer(EndpointManager.getEndpointManager(), new StateManager());
     }
 
-    private final EndpointHandler endpointHandler;
+    private final EndpointManager endpointManager;
+    private final StateManager stateManager;
 
-    private DropServer(EndpointHandler endpointHandler) {
-        this.endpointHandler = endpointHandler;
+    private DropServer(EndpointManager endpointManager, StateManager stateManager) {
+        this.endpointManager = endpointManager;
+        this.stateManager = stateManager;
     }
 
     public void start() {
-        endpointHandler.exposeAPIS();
+        stateManager.loadStateFromDisk();
+        // Last step
+        endpointManager.exposeEndpoints();
     }
 }
