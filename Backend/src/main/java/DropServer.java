@@ -23,13 +23,16 @@ public class DropServer {
     }
 
     public static DropServer newServer() {
-        return new DropServer();
+        return new DropServer(EndpointHandler.getEndpointHandler());
     }
 
-    private DropServer() {
+    private final EndpointHandler endpointHandler;
+
+    private DropServer(EndpointHandler endpointHandler) {
+        this.endpointHandler = endpointHandler;
     }
 
     public void start() {
-
+        endpointHandler.exposeAPIS();
     }
 }
