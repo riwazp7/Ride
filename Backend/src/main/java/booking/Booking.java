@@ -1,5 +1,10 @@
 package booking;
 
-public class Booking {
+import java.util.Date;
 
+public class Booking {
+    private String bookingID;
+    private String origin;
+    private String destination;
+    private Date date; // ?
 }
