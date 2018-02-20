@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class Booking {
 
+    // Implementation Details
+    /**
+     * A version number for the storage semantics.
+     * Might be useful if we have to do major unexpected schema changes.
+     * Look for other potential options.
+     */
+    private String SCHEMA_VERSION = "1.0";
+
     // Server side details
     /**
      * A unique id for this booking.
@@ -16,41 +24,39 @@ public class Booking {
     private Date bookingDate;
 
     /**
-     * If this ride has been manually confirmed and is good to go.
+     * If this ride has been manually confirmed by the vendor and is good to go.
      */
     private boolean isConfirmed;
 
     /**
-     * An ID generated in the backend.
+     * IDs of other bookings that share this ride/booking.
      * Optional.
      */
-    private String shareID; // ?
+    private String[] shareID; // ?
 
     /**
      * The price this booking was confirmed for.
      */
     private String price;
 
-
     // Client Mandatory Details
-
     /**
-     * Can be an address or a Williams dorm?
+     * Origin address or dorm/williams building.
      */
     private String origin;
 
     /**
-     *
+     * Destination address or dorm/williams building.
      */
     private String destination;
 
     /**
-     *
+     * Exact date and time the ride is requested for.
      */
     private Date rideDate; // And time
 
     /**
-     *
+     * Name
      */
     private String name;
 
