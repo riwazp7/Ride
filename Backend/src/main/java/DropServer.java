@@ -10,7 +10,7 @@ public class DropServer {
 
         // log4j basic configuration; replace later
         BasicConfigurator.configure();
-        while(true) {
+        while(true) { // Crashing after some error is better.
             try {
                 DropServer.newServer().start();
                 logger.info("Started Drop Server");
@@ -22,20 +22,21 @@ public class DropServer {
     }
 
     public static DropServer newServer() {
-        return new DropServer(EndpointManager.getEndpointManager(), new StateManager());
+        return new DropServer(EndpointManager.getEndpointManager(), new DatabaseManager());
     }
 
     private final EndpointManager endpointManager;
-    private final StateManager stateManager;
+    private final DatabaseManager databaseManager;
 
-    private DropServer(EndpointManager endpointManager, StateManager stateManager) {
+    private DropServer(EndpointManager endpointManager, DatabaseManager databaseManager) {
         this.endpointManager = endpointManager;
-        this.stateManager = stateManager;
+        this.databaseManager = databaseManager;
     }
 
     public void start() {
-        stateManager.loadStateFromDisk();
-        // Last step
+        //databaseManager.
+
+        // Expose as the last step
         endpointManager.exposeEndpoints();
     }
 }
