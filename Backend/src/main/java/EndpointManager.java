@@ -7,6 +7,7 @@ import spark.Spark;
 public class EndpointManager {
 
     private static final int PORT = 8989; // Accept as config?
+    private static final int MAX_THREADS = 4; // Accept as config.
 
     /**
      * HTTP POST
@@ -37,6 +38,7 @@ public class EndpointManager {
 
     public void exposeEndpoints() {
         Spark.port(PORT);
+        Spark.threadPool(MAX_THREADS);
         logger.info(String.format("Started Spark Rest Server at port %s", PORT));
 
         // Expose APIs
