@@ -140,7 +140,7 @@ public class Booking {
             for (Field field : Booking.class.getDeclaredFields()) {
                 toString += field.get(this).toString();
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | NullPointerException e) {
             //
         }
         return toString;
