@@ -1,3 +1,4 @@
+import jdk.internal.joptsimple.internal.Strings;
 import spark.Request;
 import spark.Response;
 
@@ -12,6 +13,10 @@ public class EndpointHandler {
     }
 
     public Object handleCheckBookingStatus(final Request request, final Response response) {
+        String bookingID = request.queryParams("id");
+        String bookingEmail = request.queryParams("email");
+        if (Strings.isNullOrEmpty())
+
         return true;
     }
 }
