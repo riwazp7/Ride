@@ -1,4 +1,5 @@
 import booking.Booking;
+import booking.BookingBuilder;
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -32,6 +33,17 @@ public class DatabaseManager {
 
     public void deleteBooking(String bookingID) {
 
+    }
+
+    public static void main(String[] args) {
+        Booking booking = new BookingBuilder()
+                .setName("Riwaz")
+                .setEmail("rp7")
+                .setBookingID("aezakmi")
+                .setIsShared(false)
+                .build();
+        String test = new Gson().toJson(booking);
+        System.out.println(test);
     }
 
 }
