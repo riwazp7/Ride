@@ -7,7 +7,7 @@ import spark.Spark;
 public class EndpointManager {
 
     private static final int PORT = 8989; // Accept as config?
-    private static final int MAX_THREADS = 4; // Accept as config.
+    private static final int MAX_THREADS = 6; // Accept as config.
 
     /**
      * HTTP POST
