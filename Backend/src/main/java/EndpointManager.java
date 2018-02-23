@@ -1,8 +1,6 @@
+import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 import spark.Spark;
 
 // @Singleton
@@ -10,7 +8,17 @@ public class EndpointManager {
 
     private static final int PORT = 8989; // Accept as config
 
-    private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getSimpleName());
+    /**
+     * HTTP POST
+     */
+    private static final String PATH_NEW_BOOKING = "/new";
+
+    /**
+     * HTTP GET
+     */
+    private static final String PATH_CHECK_BOOKING_STATUS = "/status";
+
+    private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
 
     private static EndpointManager endpointManager = null;
 
@@ -21,21 +29,25 @@ public class EndpointManager {
         return endpointManager;
     }
 
-    private EndpointManager() {
+    private final EndpointHandler endpointHandler;
 
+    private EndpointManager() {
+        this.endpointHandler = new EndpointHandler();
     }
 
     public void exposeEndpoints() {
         Spark.port(PORT);
         logger.info(String.format("Started Spark Rest Server at port %s", PORT));
-        // Expose APIs
 
-        Spark.get("", new Route() {
-            @Override
-            public Object handle(Request request, Response response) throws Exception {
-                return null;
-            }
-        });
+        // Expose APIs
+        Spark.post(PATH_NEW_BOOKING, endpointHandler::handleCreateNewBooking);
+        Spark.get(PATH_CHECK_BOOKING_STATUS, endpointHandler::handleCheckBookingStatus);
+    }
+
+    public static void main(String[] args) {
+        BasicConfigurator.configure();
+        EndpointManager endpointManager = EndpointManager.getEndpointManager();
+        endpointManager.exposeEndpoints();
     }
 
 }
