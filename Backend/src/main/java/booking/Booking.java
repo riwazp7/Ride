@@ -1,8 +1,13 @@
 package booking;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 public class Booking {
+
+    public static BookingBuilder newBuilder() {
+        return new BookingBuilder();
+    }
 
     // Implementation Details
     /**
@@ -127,7 +132,17 @@ public class Booking {
         this.comments = comments;
     }
 
-    public static BookingBuilder newBuilder() {
-        return new BookingBuilder();
+    // Remove in prod lol.
+    @Override
+    public String toString() {
+        String toString = "";
+        try {
+            for (Field field : Booking.class.getDeclaredFields()) {
+                toString += field.get(this).toString();
+            }
+        } catch (IllegalAccessException e) {
+            //
+        }
+        return toString;
     }
 }
