@@ -136,13 +136,17 @@ public class Booking {
     @Override
     public String toString() {
         String toString = "";
-        try {
-            for (Field field : Booking.class.getDeclaredFields()) {
-                toString += field.get(this).toString();
+        for (Field field : Booking.class.getDeclaredFields()) {
+            try {
+                toString += (field.getName() + ": " + field.get(this).toString() + "\n");
+            } catch (IllegalAccessException | NullPointerException e) {
+                //
             }
-        } catch (IllegalAccessException | NullPointerException e) {
-            //
         }
         return toString;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Booking.newBuilder().setEmail("testemail").build().toString());
     }
 }

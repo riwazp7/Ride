@@ -17,7 +17,8 @@ public class EndpointHandler {
         String requestBody = request.body();
         try {
             Booking booking = gson.fromJson(requestBody, Booking.class);
-
+            System.out.println("&&**");
+            System.out.println(booking);
         } catch (JsonSyntaxException e) {
             response.status(400);
             return false;

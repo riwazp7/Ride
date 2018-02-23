@@ -18,7 +18,7 @@ public class EndpointManager {
      */
     private static final String PATH_CHECK_BOOKING_STATUS = "/status";
 
-    private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
+    // private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
 
     private static EndpointManager endpointManager = null;
 
@@ -37,7 +37,7 @@ public class EndpointManager {
 
     public void exposeEndpoints() {
         Spark.port(PORT);
-        logger.info(String.format("Started Spark Rest Server at port %s", PORT));
+        // logger.info(String.format("Started Spark Rest Server at port %s", PORT));
 
         // Expose APIs
         Spark.post(PATH_NEW_BOOKING, endpointHandler::handleCreateNewBooking);
