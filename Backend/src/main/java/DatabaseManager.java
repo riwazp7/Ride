@@ -19,20 +19,20 @@ public class DatabaseManager {
         this.gson = new Gson();
     }
 
-    public void addBooking(Booking booking) {
-
+    public boolean addBooking(Booking booking) {
+        return false;
     }
 
-    public void retrieveBooking(String bookingID) {
-
+    public Booking retrieveBooking(String bookingID, String bookingEmail) {
+        return Booking.newBuilder().setName("test").setBookingID(bookingID).setEmail(bookingEmail).build();
     }
 
-    public void confirmBooking(String bookingID) {
-
+    public boolean confirmBooking(String bookingID) {
+        return false;
     }
 
-    public void deleteBooking(String bookingID) {
-
+    public boolean deleteBooking(String bookingID) {
+        return false;
     }
 
     public static void main(String[] args) {

@@ -6,7 +6,7 @@ import spark.Spark;
 // @Singleton
 public class EndpointManager {
 
-    private static final int PORT = 8989; // Accept as config
+    private static final int PORT = 8989; // Accept as config?
 
     /**
      * HTTP POST
@@ -18,7 +18,7 @@ public class EndpointManager {
      */
     private static final String PATH_CHECK_BOOKING_STATUS = "/status";
 
-    // private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
 
     private static EndpointManager endpointManager = null;
 
@@ -32,16 +32,19 @@ public class EndpointManager {
     private final EndpointHandler endpointHandler;
 
     private EndpointManager() {
-        this.endpointHandler = new EndpointHandler();
+        this.endpointHandler = new EndpointHandler(new DatabaseManager());
     }
 
     public void exposeEndpoints() {
         Spark.port(PORT);
-        // logger.info(String.format("Started Spark Rest Server at port %s", PORT));
+        logger.info(String.format("Started Spark Rest Server at port %s", PORT));
 
         // Expose APIs
         Spark.post(PATH_NEW_BOOKING, endpointHandler::handleCreateNewBooking);
+        logger.info("Exposed NEW_BOOKING Endpoint");
+
         Spark.get(PATH_CHECK_BOOKING_STATUS, endpointHandler::handleCheckBookingStatus);
+        logger.info("Exposed CHECK_BOOKING Endpoint");
     }
 
     public static void main(String[] args) {

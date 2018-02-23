@@ -8,8 +8,11 @@ import spark.Response;
 public class EndpointHandler {
 
     private final Gson gson = new Gson();
+    private final DatabaseManager databaseManager;
 
-    public EndpointHandler() {}
+    EndpointHandler(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
+    }
 
     // Maybe try catch methods here.
 
@@ -17,13 +20,16 @@ public class EndpointHandler {
         String requestBody = request.body();
         try {
             Booking booking = gson.fromJson(requestBody, Booking.class);
+
             System.out.println("&&**");
             System.out.println(booking);
+
+            return databaseManager.addBooking(booking);
+
         } catch (JsonSyntaxException e) {
             response.status(400);
-            return false;
         }
-        return true;
+        return false;
     }
 
     public Object handleCheckBookingStatus(final Request request, final Response response) {
@@ -33,6 +39,10 @@ public class EndpointHandler {
             response.status(400);
             return false;
         }
-        return true;
+        Booking booking = databaseManager.retrieveBooking(bookingID, bookingEmail);
+        if (booking != null) {
+            return booking;
+        }
+        return false;
     }
 }
