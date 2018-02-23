@@ -15,8 +15,10 @@ public class EndpointHandler {
     public Object handleCheckBookingStatus(final Request request, final Response response) {
         String bookingID = request.queryParams("id");
         String bookingEmail = request.queryParams("email");
-        if (Strings.isNullOrEmpty())
-
+        if (Strings.isNullOrEmpty(bookingID) || Strings.isNullOrEmpty(bookingEmail)) {
+            response.status(400);
+            return false;
+        }
         return true;
     }
 }
