@@ -26,6 +26,7 @@ public class DatabaseManager {
     }
 
     public boolean addBooking(Booking booking) {
+
         try {
             Document document = Document.parse(gson.toJson(booking));
             bookingsCollection.insertOne(document);

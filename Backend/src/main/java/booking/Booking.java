@@ -99,6 +99,70 @@ public class Booking {
      */
     private String comments;
 
+    public String getSCHEMA_VERSION() {
+        return SCHEMA_VERSION;
+    }
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public String[] getShareID() {
+        return shareID;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Date getRideDate() {
+        return rideDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isShared() {
+        return isShared;
+    }
+
+    public int getNumRiders() {
+        return numRiders;
+    }
+
+    public String getFlightDetails() {
+        return flightDetails;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
     Booking(
             String bookingID,
             Date bookingDate,
