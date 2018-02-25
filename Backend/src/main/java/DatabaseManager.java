@@ -1,10 +1,14 @@
 import booking.Booking;
 import booking.BookingBuilder;
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+
+import javax.annotation.Nullable;
 
 public class DatabaseManager {
 
@@ -26,7 +30,10 @@ public class DatabaseManager {
     }
 
     public boolean addBooking(Booking booking) {
-
+        // Add more and return a meaningful error.
+        if (Strings.isNullOrEmpty(booking.getBookingID()) || Strings.isNullOrEmpty(booking.getEmail())) {
+            return false;
+        }
         try {
             Document document = Document.parse(gson.toJson(booking));
             bookingsCollection.insertOne(document);
@@ -36,8 +43,15 @@ public class DatabaseManager {
         }
     }
 
+    @Nullable
     public Booking retrieveBooking(String bookingID, String bookingEmail) {
-        return Booking.newBuilder().setName("test").setBookingID(bookingID).setEmail(bookingEmail).build();
+        BasicDBObject queryObject = new BasicDBObject();
+        queryObject.put("email", bookingEmail);
+        queryObject.put("bookingID", bookingID);
+        for (Document document : bookingsCollection.find(queryObject)) {
+            return gson.fromJson(document.toJson(), Booking.class);
+        }
+        return null;
     }
 
     public boolean confirmBooking(String bookingID) {
