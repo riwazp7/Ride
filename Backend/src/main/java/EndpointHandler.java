@@ -1,11 +1,19 @@
 import booking.Booking;
+import booking.BookingBuilder;
+import booking.BookingsUtil;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
+import javax.annotation.Nullable;
+
 public class EndpointHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(EndpointHandler.class.getSimpleName());
 
     private final Gson gson = new Gson();
     private final DatabaseManager databaseManager;
@@ -14,24 +22,23 @@ public class EndpointHandler {
         this.databaseManager = databaseManager;
     }
 
-    // Maybe try catch methods here.
-
+    @Nullable
     public Object handleCreateNewBooking(final Request request, final Response response) {
         String requestBody = request.body();
         try {
-            Booking booking = gson.fromJson(requestBody, Booking.class);
-
-            System.out.println("&&**");
-            System.out.println(booking);
-
+            BookingBuilder builder = gson.fromJson(requestBody, BookingBuilder.class);
+            builder.setBookingID(BookingsUtil.generateRandomBookingID());
+            Booking booking = builder.build();
             return databaseManager.addBooking(booking);
 
         } catch (JsonSyntaxException e) {
+            logger.error("Malformed new booking request from client: ", e);
             response.status(400);
         }
-        return false;
+        return null;
     }
 
+    @Nullable
     public Object handleCheckBookingStatus(final Request request, final Response response) {
         String bookingID = request.queryParams("id");
         String bookingEmail = request.queryParams("email");
@@ -39,10 +46,6 @@ public class EndpointHandler {
             response.status(400);
             return false;
         }
-        Booking booking = databaseManager.retrieveBooking(bookingID, bookingEmail);
-        if (booking != null) {
-            return booking;
-        }
-        return false;
+        return databaseManager.retrieveBooking(bookingID, bookingEmail);
     }
 }
