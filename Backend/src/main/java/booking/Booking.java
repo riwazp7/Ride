@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Booking {
 
-    public static BookingBuilder newBuilder() {
+    static BookingBuilder newBuilder() {
         return new BookingBuilder();
     }
 
@@ -212,9 +212,5 @@ public class Booking {
             }
         }
         return toString;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Booking.newBuilder().setEmail("testemail").build().toString());
     }
 }
