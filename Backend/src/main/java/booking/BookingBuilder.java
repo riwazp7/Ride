@@ -3,10 +3,9 @@ package booking;
 import java.util.Date;
 
 public class BookingBuilder {
-    private String schema_version;
     private String bookingID;
     private Date bookingDate;
-    private boolean isConfirmed;
+    private boolean isConfirmed = false;
     private String[] shareID;
     private String price;
     private String origin;
@@ -16,9 +15,9 @@ public class BookingBuilder {
     private String phone;
     private String email;
     private boolean isShared;
-    private int numRiders;
-    private String flightDetails;
-    private String comments;
+    private int numRiders = 1;
+    private String flightDetails = "";
+    private String comments = "";
 
     public BookingBuilder setBookingID(String bookingID) {
         this.bookingID = bookingID;

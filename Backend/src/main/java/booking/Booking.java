@@ -1,5 +1,7 @@
 package booking;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.Date;
 
@@ -21,7 +23,7 @@ public class Booking {
     /**
      * A unique id for this booking.
      */
-    private String bookingID;
+    @Nonnull private String bookingID;
 
     /**
      * Check date is valid on client side, server side, or both.
@@ -37,6 +39,7 @@ public class Booking {
      * IDs of other bookings that share this ride/booking.
      * Optional.
      */
+    @Nullable
     private String[] shareID; // ?
 
     /**
@@ -91,15 +94,17 @@ public class Booking {
      * Details of flight/train the client is taking the ride to, if applicable.
      * Optional.
      */
+    @Nullable
     private String flightDetails;
 
     /**
      * Additional information that can be entered by the client.
      * Optional.
      */
+    @Nullable
     private String comments;
 
-    public String getSCHEMA_VERSION() {
+    public String SCHEMA_VERSION() {
         return SCHEMA_VERSION;
     }
 
@@ -196,7 +201,6 @@ public class Booking {
         this.comments = comments;
     }
 
-    // Remove in prod lol.
     @Override
     public String toString() {
         String toString = "";
