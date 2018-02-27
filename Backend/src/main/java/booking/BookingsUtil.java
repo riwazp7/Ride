@@ -1,6 +1,6 @@
 package booking;
 
-import jdk.internal.joptsimple.internal.Strings;
+import com.google.common.base.Strings;
 import org.apache.commons.lang.RandomStringUtils;
 
 public class BookingsUtil {
