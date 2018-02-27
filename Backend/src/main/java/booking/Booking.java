@@ -7,6 +7,33 @@ import java.util.Date;
 
 public class Booking {
 
+    static Booking fromBookingRequest(
+            BookingRequest request,
+            String bookingID,
+            Date bookingDate,
+            boolean isConfirmed,
+            String[] shareID) {
+        return newBuilder()
+                .setBookingID(bookingID)
+                .setBookingDate(bookingDate)
+                .setIsConfirmed(isConfirmed)
+                .setName(request.getName())
+                .setEmail(request.getEmail())
+                .setShareID(shareID)
+                .setPrice(request.getPrice())
+                .setOrigin(request.getOrigin())
+                .setDestination(request.getDestination())
+                .setRideDate(request.getRideDate())
+                .setName(request.getName())
+                .setPhone(request.getPhone())
+                .setEmail(request.getEmail())
+                .setIsShared(request.getNumRiders() > 1)
+                .setNumRiders(request.getNumRiders())
+                .setFlightDetails(request.getFlightDetails())
+                .setComments(request.getComments())
+                .build();
+    }
+
     static BookingBuilder newBuilder() {
         return new BookingBuilder();
     }

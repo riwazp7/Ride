@@ -5,16 +5,58 @@ import java.util.Date;
 
 public class BookingRequest {
 
-    private String price;
-    private String origin;
-    private String destination;
-    private Date rideDate;
-    private String name;
-    private String phone; // Validate
-    private String email; // Validate
-    private int numRiders; // Validate
-    @Nullable private String flightDetails;
-    @Nullable private String comments;
+    private final String price;
+    private final String origin;
+    private final String destination;
+    private final Date rideDate;
+    private final String name;
+    private final String phone; // Validate
+    private final String email; // Validate
+    private final int numRiders; // Validate
+    @Nullable private final String flightDetails;
+    @Nullable private final String comments;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Date getRideDate() {
+        return rideDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getNumRiders() {
+        return numRiders;
+    }
+
+    @Nullable
+    public String getFlightDetails() {
+        return flightDetails;
+    }
+
+    @Nullable
+    public String getComments() {
+        return comments;
+    }
 
     public BookingRequest(
             String price,
