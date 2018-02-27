@@ -16,14 +16,4 @@ public class BookingsUtil {
         }
         return true;
     }
-
-    public static Booking removeServerSideInfo(Booking booking) {
-        // Actually need different objects for client and server side.
-        return Booking.newBuilder()
-                .setBookingID(booking.getBookingID())
-                .setName(booking.getName())
-                .setEmail(booking.getEmail())
-                .setIsShared(booking.isShared())
-                .build();
-    }
 }
