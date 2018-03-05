@@ -58,8 +58,13 @@ public class DatabaseManager {
         return false;
     }
 
-    public boolean deleteBooking(String bookingID) {
-        return false;
+    // bookingId can possibly collide :/ Maybe generate longer IDs on the server side.
+    public boolean deleteBooking(String bookingID, String email) {
+        BasicDBObject toDelete = new BasicDBObject();
+        toDelete.put("email", email);
+        toDelete.put("bookingID", bookingID);
+        bookingsCollection.deleteOne(toDelete);
+        return true; // ?
     }
 
     private static void createCollectionIfNotPresent(MongoDatabase db, String collection) {
