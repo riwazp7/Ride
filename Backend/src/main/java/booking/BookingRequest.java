@@ -72,4 +72,24 @@ public class BookingRequest {
         this.numRiders = numRiders;
         this.comments = comments;
     }
+
+    public Booking toBooking(String bookingID, Date bookingDate, boolean isConfirmed, String[] shareID) {
+            return Booking.newBuilder()
+                    .setBookingID(bookingID)
+                    .setBookingDate(bookingDate)
+                    .setIsConfirmed(isConfirmed)
+                    .setName(name)
+                    .setEmail(email)
+                    .setShareID(shareID)
+                    .setPrice(price)
+                    .setOrigin(origin)
+                    .setDestination(destination)
+                    .setRideDate(rideDate)
+                    .setPhone(phone)
+                    .setEmail(email)
+                    .setIsShared(numRiders > 1)
+                    .setNumRiders(numRiders)
+                    .setComments(comments)
+                    .build();
+    }
 }

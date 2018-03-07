@@ -1,5 +1,6 @@
 import booking.Booking;
 import booking.BookingRequest;
+import booking.BookingResponse;
 import booking.BookingsUtil;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -32,12 +33,16 @@ public class EndpointHandler {
             BookingRequest bookingRequest = gson.fromJson(requestBody, BookingRequest.class);
             if (!BookingsUtil.validateBookingRequest(bookingRequest)) {
                 logger.error("Invalid booking request from client");
-                return false;
+                return null;
             }
-            Booking booking = bookingFromRequest(bookingRequest);
+            Booking booking = bookingRequest.toBooking(
+                    BookingsUtil.generateRandomBookingID(),
+                    new Date(System.currentTimeMillis()),
+                    false,
+                    null);
             databaseManager.addBooking(booking);
             communicationHandler.handleBookingRequestSuccessful(booking);
-            return true;
+            return gson.toJson(new BookingResponse(booking));
         } catch (JsonSyntaxException e) {
             logger.error("Malformed new booking request JSON from client: ", e);
             response.status(400);
@@ -54,14 +59,5 @@ public class EndpointHandler {
             return false;
         }
         return databaseManager.retrieveBooking(bookingID, bookingEmail);
-    }
-
-    private Booking bookingFromRequest(BookingRequest bookingRequest) throws JsonSyntaxException {
-        return Booking.fromBookingRequest(bookingRequest,
-                BookingsUtil.generateRandomBookingID(),
-                new Date(System.currentTimeMillis()),
-                false,
-                null);
-
     }
 }
