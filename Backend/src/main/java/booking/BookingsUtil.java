@@ -3,8 +3,6 @@ package booking;
 import com.google.common.base.Strings;
 import org.apache.commons.lang.RandomStringUtils;
 
-import java.util.Date;
-
 public class BookingsUtil {
 
     // Display message in the ui to call bob instead for rides with larger # of riders.
@@ -19,7 +17,7 @@ public class BookingsUtil {
     // This should be checked in the client side too but the check is still needed to not crash the server.
     public static boolean validateBookingRequest(BookingRequest bookingRequest) {
         if (Strings.isNullOrEmpty(bookingRequest.getEmail())
-                || bookingRequest.getNumRiders() > MAX_RIDERS
+                || bookingRequest.getNumRiders() > MAX_RIDERS || bookingRequest.getNumRiders() < 1
                 || Strings.isNullOrEmpty(bookingRequest.getEmail())
                 || Strings.isNullOrEmpty(bookingRequest.getName())
                 || Strings.isNullOrEmpty(bookingRequest.getEmail())
@@ -40,8 +38,8 @@ public class BookingsUtil {
                 .setOrigin("whereever")
                 .setPrice("50")
                 .setBookingID(generateRandomBookingID())
-                .setBookingDate(new Date(System.currentTimeMillis()))
-                .setRideDate(new Date(1520443565))
+                .setBookingDate(System.currentTimeMillis())
+                .setRideDate(1520443565)
                 .setPhone("4133467873")
                 .setComments("No comment")
                 .setName("Riwaz")
@@ -57,8 +55,8 @@ public class BookingsUtil {
                 .setOrigin("Kathmandu")
                 .setPrice("60")
                 .setBookingID(generateRandomBookingID())
-                .setBookingDate(new Date(System.currentTimeMillis()))
-                .setRideDate(new Date(1520543565))
+                .setBookingDate(System.currentTimeMillis())
+                .setRideDate(1520543565)
                 .setPhone("4133467870")
                 .setComments("Yes comment")
                 .setName("Karan")

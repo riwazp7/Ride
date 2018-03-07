@@ -1,4 +1,6 @@
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,9 +9,10 @@ public class DropServer {
     private final static Logger logger = LoggerFactory.getLogger(DropServer.class.getSimpleName());
 
     public static void main(String[] args) throws Exception {
-
         // log4j basic configuration; replace later
         BasicConfigurator.configure();
+        LogManager.getRootLogger().setLevel(Level.INFO);
+
         while(true) { // Crashing after some error is better.
             try {
                 DropServer.newServer().start();

@@ -37,7 +37,7 @@ public class EndpointHandler {
             }
             Booking booking = bookingRequest.toBooking(
                     BookingsUtil.generateRandomBookingID(),
-                    new Date(System.currentTimeMillis()),
+                    System.currentTimeMillis(),
                     false,
                     null);
             databaseManager.addBooking(booking);

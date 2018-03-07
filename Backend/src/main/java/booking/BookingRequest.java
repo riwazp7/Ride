@@ -1,14 +1,13 @@
 package booking;
 
 import javax.annotation.Nullable;
-import java.util.Date;
 
 public class BookingRequest {
 
     private final String price;
     private final String origin;
     private final String destination;
-    private final Date rideDate;
+    private final long rideDate;
     private final String name;
     private final String phone; // Validate
     private final String email; // Validate
@@ -27,7 +26,7 @@ public class BookingRequest {
         return destination;
     }
 
-    public Date getRideDate() {
+    public long getRideDate() {
         return rideDate;
     }
 
@@ -56,7 +55,7 @@ public class BookingRequest {
             String price,
             String origin,
             String destination,
-            Date rideDate,
+            long rideDate,
             String name,
             String phone,
             String email,
@@ -73,7 +72,7 @@ public class BookingRequest {
         this.comments = comments;
     }
 
-    public Booking toBooking(String bookingID, Date bookingDate, boolean isConfirmed, String[] shareID) {
+    public Booking toBooking(String bookingID, long bookingDate, boolean isConfirmed, String[] shareID) {
             return Booking.newBuilder()
                     .setBookingID(bookingID)
                     .setBookingDate(bookingDate)

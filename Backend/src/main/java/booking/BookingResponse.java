@@ -2,18 +2,17 @@ package booking;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Date;
 
 public class BookingResponse {
 
     @Nonnull
     private String bookingID;
-    private Date bookingDate;
+    private long bookingDate;
     private boolean isConfirmed;
     private String price;
     private String origin;
     private String destination;
-    private Date rideDate; // And time?
+    private long rideDate; // And time?
     private String name;
     private String phone;
     private String email;

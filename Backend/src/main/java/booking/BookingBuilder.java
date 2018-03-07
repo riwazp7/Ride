@@ -1,17 +1,15 @@
 package booking;
 
-import java.util.Date;
-
 // Have a single builder for Booking Request, Booking, and Booking Response?
 public class BookingBuilder {
     private String bookingID;
-    private Date bookingDate;
+    private long bookingDate;
     private boolean isConfirmed = false;
     private String[] shareID;
     private String price;
     private String origin;
     private String destination;
-    private Date rideDate;
+    private long rideDate;
     private String name;
     private String phone;
     private String email;
@@ -24,7 +22,7 @@ public class BookingBuilder {
         return this;
     }
 
-    public BookingBuilder setBookingDate(Date bookingDate) {
+    public BookingBuilder setBookingDate(long bookingDate) {
         this.bookingDate = bookingDate;
         return this;
     }
@@ -54,7 +52,7 @@ public class BookingBuilder {
         return this;
     }
 
-    public BookingBuilder setRideDate(Date rideDate) {
+    public BookingBuilder setRideDate(long rideDate) {
         this.rideDate = rideDate;
         return this;
     }

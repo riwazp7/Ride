@@ -3,7 +3,6 @@ package booking;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
-import java.util.Date;
 
 public class Booking {
 
@@ -28,7 +27,7 @@ public class Booking {
     /**
      * Check date is valid on client side, server side, or both.
      */
-    private Date bookingDate;
+    private long bookingDate;
 
     /**
      * If this ride has been manually confirmed by the vendor and is good to go.
@@ -61,7 +60,7 @@ public class Booking {
     /**
      * Exact date and time the ride is requested for.
      */
-    private Date rideDate; // And time
+    private long rideDate; // And time
 
     /**
      * Name
@@ -105,7 +104,7 @@ public class Booking {
         return bookingID;
     }
 
-    public Date getBookingDate() {
+    public long getBookingDate() {
         return bookingDate;
     }
 
@@ -129,7 +128,7 @@ public class Booking {
         return destination;
     }
 
-    public Date getRideDate() {
+    public long getRideDate() {
         return rideDate;
     }
 
@@ -159,13 +158,13 @@ public class Booking {
 
     Booking(
             String bookingID,
-            Date bookingDate,
+            long bookingDate,
             boolean isConfirmed,
             String[] shareID,
             String price,
             String origin,
             String destination,
-            Date rideDate,
+            long rideDate,
             String name,
             String phone,
             String email,

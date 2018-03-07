@@ -12,12 +12,12 @@ public class CommunicationHandler {
 
     private static final String EMAIL_HOST = "smtp.googlemail.com";
     private static final int SMTP_PORT = 465;
-    private static final String EMAIL_FROM = ""; // is this needed?
+    private static final String EMAIL_FROM = "dropwebsitetest1@gmail.com"; // is this needed?
     private static final String USER_NAME = "dropwebsitetest1";
     private static final String PASSWORD = "testtest!1"; // lol
 
-    private static final String bookingsConfirmationEmailTemplate = "%s%s";
-    private static final String bookingRequestSuccessfulTemplate = "%s%s";
+    private static final String bookingsConfirmationEmailTemplate = "%s";
+    private static final String bookingRequestSuccessfulTemplate = "%s";
 
 
 
@@ -27,7 +27,10 @@ public class CommunicationHandler {
             sendEmail("", emailContent, booking.getEmail());
         } catch (EmailException e) {
             logger.warn(
-                    String.format("Sending booking confirmation email to %s failed with exception", booking.getEmail()),
+                    String.format(
+                            "Sending booking confirmation email to %s for %s failed with exception",
+                            booking.getEmail(),
+                            booking.getBookingID()),
                     e); // Error?
         }
     }
@@ -38,7 +41,10 @@ public class CommunicationHandler {
             sendEmail("", emailContent, booking.getEmail());
         } catch (EmailException e) {
             logger.warn(
-                    String.format("Sending booking confirmation email to %s failed with exception", booking.getEmail()),
+                    String.format(
+                            "Sending booking confirmation email to %s for ID %s failed with exception",
+                            booking.getEmail(),
+                            booking.getBookingID()),
                     e); // Error?
         }
     }
