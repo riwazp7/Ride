@@ -1,5 +1,5 @@
 import booking.Booking;
-import booking.BookingBuilder;
+import booking.BookingRequest;
 import booking.BookingsUtil;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
@@ -10,6 +10,7 @@ import spark.Request;
 import spark.Response;
 
 import javax.annotation.Nullable;
+import java.util.Date;
 
 public class EndpointHandler {
 
@@ -28,14 +29,17 @@ public class EndpointHandler {
     public Object handleCreateNewBooking(final Request request, final Response response) {
         String requestBody = request.body();
         try {
-            BookingBuilder builder = gson.fromJson(requestBody, BookingBuilder.class);
-            builder.setBookingID(BookingsUtil.generateRandomBookingID());
-            Booking booking = builder.build();
+            BookingRequest bookingRequest = gson.fromJson(requestBody, BookingRequest.class);
+            if (!BookingsUtil.validateBookingRequest(bookingRequest)) {
+                logger.error("Invalid booking request from client");
+                return false;
+            }
+            Booking booking = bookingFromRequest(bookingRequest);
             databaseManager.addBooking(booking);
             communicationHandler.handleBookingRequestSuccessful(booking);
             return true;
         } catch (JsonSyntaxException e) {
-            logger.error("Malformed new booking request from client: ", e);
+            logger.error("Malformed new booking request JSON from client: ", e);
             response.status(400);
         }
         return null;
@@ -50,5 +54,14 @@ public class EndpointHandler {
             return false;
         }
         return databaseManager.retrieveBooking(bookingID, bookingEmail);
+    }
+
+    private Booking bookingFromRequest(BookingRequest bookingRequest) throws JsonSyntaxException {
+        return Booking.fromBookingRequest(bookingRequest,
+                BookingsUtil.generateRandomBookingID(),
+                new Date(System.currentTimeMillis()),
+                false,
+                null);
+
     }
 }

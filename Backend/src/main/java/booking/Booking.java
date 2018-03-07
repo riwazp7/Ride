@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Booking {
 
-    static Booking fromBookingRequest(
+    public static Booking fromBookingRequest(
             BookingRequest request,
             String bookingID,
             Date bookingDate,
