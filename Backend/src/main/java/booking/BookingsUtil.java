@@ -3,6 +3,8 @@ package booking;
 import com.google.common.base.Strings;
 import org.apache.commons.lang.RandomStringUtils;
 
+import java.util.Date;
+
 public class BookingsUtil {
 
     // Display message in the ui to call bob instead for rides with larger # of riders.
@@ -13,7 +15,7 @@ public class BookingsUtil {
     }
 
     // Better way to do this?
-    // This should be handled in the client side but the check is still needed to not crash the server.
+    // This should be checked in the client side too but the check is still needed to not crash the server.
     public static boolean validateBookingRequest(BookingRequest bookingRequest) {
         if (Strings.isNullOrEmpty(bookingRequest.getEmail())
                 || bookingRequest.getNumRiders() > MAX_RIDERS
@@ -28,5 +30,22 @@ public class BookingsUtil {
             return false;
         }
         return true;
+    }
+
+    // Move to test utils once we have one :)
+    static Booking getTestBookingA() {
+        return Booking.newBuilder()
+                .setDestination("Albany")
+                .setOrigin("whereever")
+                .setPrice("50")
+                .setBookingID(generateRandomBookingID())
+                .setBookingDate(new Date(System.currentTimeMillis()))
+                .setRideDate(new Date(1520443565))
+                .setPhone("4133467873")
+                .setComments("No comment")
+                .setName("Riwaz")
+                .setNumRiders(1)
+                .setEmail("rp7@williams.edu")
+                .build();
     }
 }
