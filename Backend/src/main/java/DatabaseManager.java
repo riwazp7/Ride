@@ -1,10 +1,10 @@
 import booking.Booking;
 import booking.BookingBuilder;
-import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
@@ -20,7 +20,7 @@ public class DatabaseManager {
     private final MongoCollection<Document> bookingsCollection;
     private final Gson gson;
 
-    public DatabaseManager() {
+    DatabaseManager() {
         this.mongoClient
                 = new MongoClient("localhost");
         this.mongoDatabase = mongoClient.getDatabase(MONGO_DB_NAME);
@@ -29,33 +29,31 @@ public class DatabaseManager {
         this.gson = new Gson();
     }
 
-    public boolean addBooking(Booking booking) {
-        // Add more and return a meaningful error.
-        if (Strings.isNullOrEmpty(booking.getBookingID()) || Strings.isNullOrEmpty(booking.getEmail())) {
-            return false;
-        }
-        try {
-            Document document = Document.parse(gson.toJson(booking));
-            bookingsCollection.insertOne(document);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    /**
+     *
+     * @param booking A valid booking with all required fields non-empty and non-null.
+     */
+    public void addBooking(Booking booking) {
+        Document document = Document.parse(gson.toJson(booking));
+        bookingsCollection.insertOne(document);
     }
 
     @Nullable
     public Booking retrieveBooking(String bookingID, String bookingEmail) {
-        BasicDBObject queryObject = new BasicDBObject();
-        queryObject.put("email", bookingEmail);
-        queryObject.put("bookingID", bookingID);
-        for (Document document : bookingsCollection.find(queryObject)) {
-            return gson.fromJson(document.toJson(), Booking.class);
+        Document document = new Document("email", bookingEmail);
+        document.append("bookingID", bookingID);
+
+        MongoCursor<Document> booking = bookingsCollection.find(document).iterator();
+        if (booking.hasNext()) {
+            return gson.fromJson(booking.next().toJson(), Booking.class);
         }
         return null;
     }
 
-    public boolean confirmBooking(String bookingID) {
-        return false;
+    public void confirmBooking(String bookingID) {
+        Document document = new Document("bookingID", bookingID);
+        Document updateQuery = new Document("$set", new Document("isConfirmed", true));
+        bookingsCollection.updateOne(document, updateQuery);
     }
 
     // bookingId can possibly collide :/ Maybe generate longer IDs on the server side.
