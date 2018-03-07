@@ -17,7 +17,6 @@ public class BookingBuilder {
     private String email;
     private boolean isShared;
     private int numRiders = 1;
-    private String flightDetails = "";
     private String comments = "";
 
     public BookingBuilder setBookingID(String bookingID) {
@@ -85,11 +84,6 @@ public class BookingBuilder {
         return this;
     }
 
-    public BookingBuilder setFlightDetails(String flightDetails) {
-        this.flightDetails = flightDetails;
-        return this;
-    }
-
     public BookingBuilder setComments(String comments) {
         this.comments = comments;
         return this;
@@ -110,7 +104,6 @@ public class BookingBuilder {
                 email,
                 isShared,
                 numRiders,
-                flightDetails,
                 comments);
     }
 }

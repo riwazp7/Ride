@@ -33,7 +33,7 @@ public class EndpointManager {
     private final EndpointHandler endpointHandler;
 
     private EndpointManager() {
-        this.endpointHandler = new EndpointHandler(new DatabaseManager());
+        this.endpointHandler = new EndpointHandler(new DatabaseManager(), new CommunicationHandler());
     }
 
     public void exposeEndpoints() {

@@ -13,7 +13,6 @@ public class BookingRequest {
     private final String phone; // Validate
     private final String email; // Validate
     private final int numRiders; // Validate
-    @Nullable private final String flightDetails;
     @Nullable private final String comments;
 
     public String getPrice() {
@@ -49,11 +48,6 @@ public class BookingRequest {
     }
 
     @Nullable
-    public String getFlightDetails() {
-        return flightDetails;
-    }
-
-    @Nullable
     public String getComments() {
         return comments;
     }
@@ -67,7 +61,6 @@ public class BookingRequest {
             String phone,
             String email,
             int numRiders,
-            String flightDetails,
             String comments) {
         this.price = price;
         this.origin = origin;
@@ -77,7 +70,6 @@ public class BookingRequest {
         this.phone = phone;
         this.email = email;
         this.numRiders = numRiders;
-        this.flightDetails = flightDetails;
         this.comments = comments;
     }
 }

@@ -29,7 +29,6 @@ public class Booking {
                 .setEmail(request.getEmail())
                 .setIsShared(request.getNumRiders() > 1)
                 .setNumRiders(request.getNumRiders())
-                .setFlightDetails(request.getFlightDetails())
                 .setComments(request.getComments())
                 .build();
     }
@@ -118,13 +117,6 @@ public class Booking {
     // Client Optional Details
 
     /**
-     * Details of flight/train the client is taking the ride to, if applicable.
-     * Optional.
-     */
-    @Nullable
-    private String flightDetails;
-
-    /**
      * Additional information that can be entered by the client.
      * Optional.
      */
@@ -187,10 +179,6 @@ public class Booking {
         return numRiders;
     }
 
-    public String getFlightDetails() {
-        return flightDetails;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -209,7 +197,6 @@ public class Booking {
             String email,
             boolean isShared,
             int numRiders,
-            String flightDetails,
             String comments) {
         this.bookingID = bookingID;
         this.bookingDate = bookingDate;
@@ -224,7 +211,6 @@ public class Booking {
         this.email = email;
         this.isShared = isShared;
         this.numRiders = numRiders;
-        this.flightDetails = flightDetails;
         this.comments = comments;
     }
 
