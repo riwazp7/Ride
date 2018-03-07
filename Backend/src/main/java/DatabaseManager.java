@@ -1,11 +1,12 @@
 import booking.Booking;
-import booking.BookingBuilder;
+import booking.BookingsUtil;
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.apache.log4j.BasicConfigurator;
 import org.bson.Document;
 
 import javax.annotation.Nullable;
@@ -75,14 +76,10 @@ public class DatabaseManager {
     }
 
     public static void main(String[] args) {
-        Booking booking = new BookingBuilder()
-                .setName("Riwaz")
-                .setEmail("rp7")
-                .setBookingID("aezakmi")
-                .setIsShared(false)
-                .build();
-        String test = new Gson().toJson(booking);
-        System.out.println(test);
+        BasicConfigurator.configure();
+        DatabaseManager databaseManager = new DatabaseManager();
+        databaseManager.addBooking(BookingsUtil.getTestBookingA());
+        databaseManager.addBooking(BookingsUtil.getTestBookingB());
     }
 
 }

@@ -2,6 +2,7 @@ package booking;
 
 import java.util.Date;
 
+// Have a single builder for Booking Request, Booking, and Booking Response?
 public class BookingBuilder {
     private String bookingID;
     private Date bookingDate;

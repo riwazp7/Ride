@@ -15,6 +15,7 @@ public class BookingsUtil {
     }
 
     // Better way to do this?
+    // Other logical checks? Like Origin != Dest, validate date and time, etc.
     // This should be checked in the client side too but the check is still needed to not crash the server.
     public static boolean validateBookingRequest(BookingRequest bookingRequest) {
         if (Strings.isNullOrEmpty(bookingRequest.getEmail())
@@ -33,7 +34,7 @@ public class BookingsUtil {
     }
 
     // Move to test utils once we have one :)
-    static Booking getTestBookingA() {
+    public static Booking getTestBookingA() {
         return Booking.newBuilder()
                 .setDestination("Albany")
                 .setOrigin("whereever")
@@ -44,6 +45,23 @@ public class BookingsUtil {
                 .setPhone("4133467873")
                 .setComments("No comment")
                 .setName("Riwaz")
+                .setNumRiders(1)
+                .setEmail("rp7@williams.edu")
+                .build();
+    }
+
+    // Move to test utils once we have one :)
+    public static Booking getTestBookingB() {
+        return Booking.newBuilder()
+                .setDestination("Nepal")
+                .setOrigin("Kathmandu")
+                .setPrice("60")
+                .setBookingID(generateRandomBookingID())
+                .setBookingDate(new Date(System.currentTimeMillis()))
+                .setRideDate(new Date(1520543565))
+                .setPhone("4133467870")
+                .setComments("Yes comment")
+                .setName("Karan")
                 .setNumRiders(1)
                 .setEmail("rp7@williams.edu")
                 .build();

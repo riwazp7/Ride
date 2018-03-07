@@ -17,9 +17,11 @@ public class EndpointHandler {
 
     private final Gson gson = new Gson();
     private final DatabaseManager databaseManager;
+    private final CommunicationHandler communicationHandler;
 
-    EndpointHandler(DatabaseManager databaseManager) {
+    EndpointHandler(DatabaseManager databaseManager, CommunicationHandler communicationHandler) {
         this.databaseManager = databaseManager;
+        this.communicationHandler = communicationHandler;
     }
 
     @Nullable
@@ -29,8 +31,9 @@ public class EndpointHandler {
             BookingBuilder builder = gson.fromJson(requestBody, BookingBuilder.class);
             builder.setBookingID(BookingsUtil.generateRandomBookingID());
             Booking booking = builder.build();
-            return databaseManager.addBooking(booking);
-
+            databaseManager.addBooking(booking);
+            communicationHandler.handleBookingRequestSuccessful(booking);
+            return true;
         } catch (JsonSyntaxException e) {
             logger.error("Malformed new booking request from client: ", e);
             response.status(400);
