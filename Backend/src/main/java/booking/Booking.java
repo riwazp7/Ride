@@ -27,7 +27,7 @@ public class Booking {
     /**
      * Check date is valid on client side, server side, or both.
      */
-    private long bookingDate;
+    private String bookingDate;
 
     /**
      * If this ride has been manually confirmed by the vendor and is good to go.
@@ -60,7 +60,7 @@ public class Booking {
     /**
      * Exact date and time the ride is requested for.
      */
-    private long rideDate; // And time
+    private String rideDate; // And time
 
     /**
      * Name
@@ -104,7 +104,7 @@ public class Booking {
         return bookingID;
     }
 
-    public long getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 
@@ -128,7 +128,7 @@ public class Booking {
         return destination;
     }
 
-    public long getRideDate() {
+    public String getRideDate() {
         return rideDate;
     }
 
@@ -158,13 +158,13 @@ public class Booking {
 
     Booking(
             String bookingID,
-            long bookingDate,
+            String bookingDate,
             boolean isConfirmed,
             String[] shareID,
             String price,
             String origin,
             String destination,
-            long rideDate,
+            String rideDate,
             String name,
             String phone,
             String email,

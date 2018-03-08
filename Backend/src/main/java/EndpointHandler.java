@@ -11,7 +11,6 @@ import spark.Request;
 import spark.Response;
 
 import javax.annotation.Nullable;
-import java.util.Date;
 
 public class EndpointHandler {
 
@@ -37,7 +36,7 @@ public class EndpointHandler {
             }
             Booking booking = bookingRequest.toBooking(
                     BookingsUtil.generateRandomBookingID(),
-                    System.currentTimeMillis(),
+                    System.currentTimeMillis() + "",
                     false,
                     null);
             databaseManager.addBooking(booking);
@@ -59,5 +58,22 @@ public class EndpointHandler {
             return false;
         }
         return databaseManager.retrieveBooking(bookingID, bookingEmail);
+    }
+
+    @Nullable
+    public Object handleConfirmBooking(final Request request, final Response response) {
+        String bookingID = request.queryParams("id");
+        String email = request.queryParams("email");
+        if (Strings.isNullOrEmpty(bookingID) || Strings.isNullOrEmpty(email)) {
+            response.status(400);
+            return false;
+        }
+        Booking booking = databaseManager.confirmBooking(bookingID, email);
+        if (booking == null) {
+            return false;
+        }
+        // More verification needed here? that the booking was actually confirmed.
+        communicationHandler.handleBookingConfirmation(booking);
+        return true;
     }
 }

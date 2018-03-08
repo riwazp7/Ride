@@ -1,6 +1,7 @@
 import booking.Booking;
 import booking.BookingsUtil;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -8,10 +9,14 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.apache.log4j.BasicConfigurator;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 
 public class DatabaseManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class.getSimpleName());
 
     private static final String MONGO_DB_NAME = "DB_DROP";
     private static final String MONGO_BOOKINGS_COLLECTION = "BOOKINGS_COLLECTION";
@@ -40,7 +45,7 @@ public class DatabaseManager {
     }
 
     @Nullable
-    public Booking retrieveBooking(String bookingID, String bookingEmail) {
+    public Booking retrieveBooking(String bookingID, String bookingEmail) throws JsonSyntaxException {
         Document document = new Document("email", bookingEmail);
         document.append("bookingID", bookingID);
 
@@ -51,10 +56,17 @@ public class DatabaseManager {
         return null;
     }
 
-    public void confirmBooking(String bookingID) {
+    @Nullable
+    public Booking confirmBooking(String bookingID, String bookingEmail) {
+        Booking booking = retrieveBooking(bookingID, bookingEmail);
+        if (booking == null) {
+            return null;
+        }
         Document document = new Document("bookingID", bookingID);
+        document.append("email", bookingEmail);
         Document updateQuery = new Document("$set", new Document("isConfirmed", true));
         bookingsCollection.updateOne(document, updateQuery);
+        return booking;
     }
 
     // bookingId can possibly collide :/ Maybe generate longer IDs on the server side.

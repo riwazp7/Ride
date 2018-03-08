@@ -7,12 +7,12 @@ public class BookingResponse {
 
     @Nonnull
     private String bookingID;
-    private long bookingDate;
+    private String bookingDate;
     private boolean isConfirmed;
     private String price;
     private String origin;
     private String destination;
-    private long rideDate; // And time?
+    private String rideDate; // And time?
     private String name;
     private String phone;
     private String email;

@@ -19,6 +19,11 @@ public class EndpointManager {
      */
     private static final String PATH_CHECK_BOOKING_STATUS = "/status";
 
+    /**
+     * HTTP
+     */
+    private static final String PATH_CONFIRM_BOOKING = "/confirm";
+
     private static final Logger logger = LoggerFactory.getLogger(EndpointManager.class.getName());
 
     private static EndpointManager endpointManager = null;
@@ -47,6 +52,9 @@ public class EndpointManager {
 
         Spark.get(PATH_CHECK_BOOKING_STATUS, endpointHandler::handleCheckBookingStatus);
         logger.info("Exposed CHECK_BOOKING Endpoint");
+
+        Spark.put(PATH_CONFIRM_BOOKING, endpointHandler::handleConfirmBooking);
+        logger.info("Exposed CONFIRM BOOKING Endpoint");
     }
 
     public static void main(String[] args) {
