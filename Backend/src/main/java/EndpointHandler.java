@@ -97,4 +97,14 @@ public class EndpointHandler {
         }
         return false;
     }
+
+    public boolean handleDeleteBooking(final Request request, final Response response) {
+        String bookingID = request.queryParams("id");
+        String email = request.queryParams("email");
+        if (Strings.isNullOrEmpty(bookingID) || Strings.isNullOrEmpty(email)) {
+            response.status(400);
+            return false;
+        }
+        return databaseHandler.deleteBooking(bookingID, email);
+    }
 }

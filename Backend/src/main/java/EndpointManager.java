@@ -68,6 +68,8 @@ public class EndpointManager {
         logger.info("Exposed CONFIRM BOOKING Endpoint");
 
         Spark.put(PATH_GET_ALL_BOOKINGS, endpointHandler::handleGetAllBookings);
+
+        Spark.delete(PATH_REMOVE_BOOKING,endpointHandler::handleDeleteBooking);
     }
 
     public static void main(String[] args) {
