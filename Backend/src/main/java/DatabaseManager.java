@@ -35,7 +35,7 @@ public class DatabaseManager {
 
     DatabaseManager() {
         this.mongoClient
-                = new MongoClient(uri);
+                = new MongoClient("localhost");
         this.mongoDatabase = mongoClient.getDatabase(MONGO_DB_NAME);
         createCollectionIfNotPresent(mongoDatabase, MONGO_BOOKINGS_COLLECTION);
         this.bookingsCollection = mongoDatabase.getCollection(MONGO_BOOKINGS_COLLECTION);
