@@ -9,9 +9,6 @@ public class DatabaseManager {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class.getSimpleName());
 
-    private static final MongoClientURI uri
-            = new MongoClientURI("mongodb+srv://riwazp7:amdisbetterthanintel!@cluster0-wqfk4.mongodb.net/test");
-
     private static final String MONGO_DB_NAME = "DB_DROP";
     private static final String MONGO_BOOKINGS_COLLECTION = "BOOKINGS_COLLECTION";
 

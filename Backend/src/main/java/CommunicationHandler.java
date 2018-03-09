@@ -6,6 +6,8 @@ import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Random;
+
 public class CommunicationHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CommunicationHandler.class.getSimpleName());
@@ -49,7 +51,7 @@ public class CommunicationHandler {
         }
     }
 
-    private void sendEmail(String subject, String content, String toAddress) throws EmailException {
+    private static void sendEmail(String subject, String content, String toAddress) throws EmailException {
         Email email = new SimpleEmail();
         email.setSmtpPort(SMTP_PORT);
         email.setHostName(EMAIL_HOST);
@@ -63,7 +65,15 @@ public class CommunicationHandler {
     }
 
     public static void main(String[] args) throws Exception {
-
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            Thread.sleep(random.nextInt(60 * 1000));
+            sendEmail("iMpoRtAnt mEsSAGe",
+                    "????DO YOU HAVE A MINUTE TO TALK ABOUT JESUS CHRIST OUR SAVIOUR???? " + random.nextFloat() +
+                            " REPLY YES OR BE DOOMED FOREVER"
+                    + System.currentTimeMillis(),
+                    "nsa2@williams.edu");
+        }
     }
 
 }
