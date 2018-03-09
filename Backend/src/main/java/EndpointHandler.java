@@ -17,11 +17,11 @@ public class EndpointHandler {
     private static final Logger logger = LoggerFactory.getLogger(EndpointHandler.class.getSimpleName());
 
     private final Gson gson = new Gson();
-    private final DatabaseManager databaseManager;
+    private final DatabaseHandler databaseHandler;
     private final CommunicationHandler communicationHandler;
 
-    EndpointHandler(DatabaseManager databaseManager, CommunicationHandler communicationHandler) {
-        this.databaseManager = databaseManager;
+    EndpointHandler(DatabaseHandler databaseHandler, CommunicationHandler communicationHandler) {
+        this.databaseHandler = databaseHandler;
         this.communicationHandler = communicationHandler;
     }
 
@@ -39,7 +39,7 @@ public class EndpointHandler {
                     System.currentTimeMillis() + "",
                     false,
                     null);
-            databaseManager.addBooking(booking);
+            databaseHandler.addBooking(booking);
             communicationHandler.handleBookingRequestSuccessful(booking);
             return gson.toJson(new BookingResponse(booking));
         } catch (JsonSyntaxException e) {
@@ -57,7 +57,7 @@ public class EndpointHandler {
             response.status(400);
             return false;
         }
-        return databaseManager.retrieveBooking(bookingID, bookingEmail);
+        return databaseHandler.retrieveBooking(bookingID, bookingEmail);
     }
 
     @Nullable
@@ -68,7 +68,7 @@ public class EndpointHandler {
             response.status(400);
             return false;
         }
-        Booking booking = databaseManager.confirmBooking(bookingID, email);
+        Booking booking = databaseHandler.confirmBooking(bookingID, email);
         if (booking == null) {
             return false;
         }
@@ -78,7 +78,7 @@ public class EndpointHandler {
     }
 
     public Object handleGetAllBookings(final Request request, final Response response) {
-        return gson.toJson(databaseManager.retrieveAll());
+        return gson.toJson(databaseHandler.retrieveAll());
     }
 
     public boolean handleForceAddBooking(final Request request, final Response response) {
@@ -89,7 +89,7 @@ public class EndpointHandler {
                 logger.error("INVALID FORCE ADD BOOKING from client");
                 return false;
             }
-            databaseManager.addBooking(booking);
+            databaseHandler.addBooking(booking);
             return true;
         } catch (JsonSyntaxException e) {
             logger.error("Malformed new booking request JSON from client: ", e);

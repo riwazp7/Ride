@@ -48,7 +48,8 @@ public class EndpointManager {
     private final EndpointHandler endpointHandler;
 
     private EndpointManager() {
-        this.endpointHandler = new EndpointHandler(new DatabaseManager(), new CommunicationHandler());
+        this.endpointHandler
+                = new EndpointHandler(new DatabaseManager().getDatabaseHandler(), new CommunicationHandler());
     }
 
     public void exposeEndpoints() {
