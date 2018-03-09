@@ -8,6 +8,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import org.apache.log4j.BasicConfigurator;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -83,13 +84,20 @@ public class DatabaseManager {
         return booking;
     }
 
-    // bookingId can possibly collide :/ Maybe generate longer IDs on the server side.
     public boolean deleteBooking(String bookingID, String email) {
         BasicDBObject toDelete = new BasicDBObject();
         toDelete.put("email", email);
         toDelete.put("bookingID", bookingID);
-        bookingsCollection.deleteOne(toDelete);
-        return true; // ?
+        DeleteResult deleteResult = bookingsCollection.deleteOne(toDelete);
+        if (deleteResult.wasAcknowledged()) {
+            logger.debug(String.format("Delete Booking request for ID:%s, email:%s succeeded", bookingID, email));
+            return true; // ?
+        }
+        logger.error(String.format(
+                "Delete request for ID:%s, email:%s was NOT acknowledged by the database",
+                bookingID,
+                email));
+        return false;
     }
 
     private static void createCollectionIfNotPresent(MongoDatabase db, String collection) {
