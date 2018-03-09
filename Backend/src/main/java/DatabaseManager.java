@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -13,10 +14,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class DatabaseManager {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseManager.class.getSimpleName());
+
+    private static final MongoClientURI uri
+            = new MongoClientURI("mongodb+srv://riwazp7:amdisbetterthanintel!@cluster0-wqfk4.mongodb.net/test");
 
     private static final String MONGO_DB_NAME = "DB_DROP";
     private static final String MONGO_BOOKINGS_COLLECTION = "BOOKINGS_COLLECTION";
@@ -28,7 +35,7 @@ public class DatabaseManager {
 
     DatabaseManager() {
         this.mongoClient
-                = new MongoClient("localhost");
+                = new MongoClient(uri);
         this.mongoDatabase = mongoClient.getDatabase(MONGO_DB_NAME);
         createCollectionIfNotPresent(mongoDatabase, MONGO_BOOKINGS_COLLECTION);
         this.bookingsCollection = mongoDatabase.getCollection(MONGO_BOOKINGS_COLLECTION);
@@ -42,6 +49,13 @@ public class DatabaseManager {
     public void addBooking(Booking booking) {
         Document document = Document.parse(gson.toJson(booking));
         bookingsCollection.insertOne(document);
+    }
+
+    public List<Booking> retrieveAll() {
+        List<Booking> res = new ArrayList<>();
+        bookingsCollection.find()
+                .forEach((Consumer<Document>) document -> res.add(gson.fromJson(document.toJson(), Booking.class)));
+        return res;
     }
 
     @Nullable

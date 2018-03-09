@@ -16,19 +16,29 @@ public class BookingsUtil {
     // Other logical checks? Like Origin != Dest, validate date and time, etc.
     // This should be checked in the client side too but the check is still needed to not crash the server.
     public static boolean validateBookingRequest(BookingRequest bookingRequest) {
-        if (Strings.isNullOrEmpty(bookingRequest.getEmail())
-                || bookingRequest.getNumRiders() > MAX_RIDERS || bookingRequest.getNumRiders() < 1
-                || Strings.isNullOrEmpty(bookingRequest.getEmail())
-                || Strings.isNullOrEmpty(bookingRequest.getName())
-                || Strings.isNullOrEmpty(bookingRequest.getEmail())
-                || Strings.isNullOrEmpty(bookingRequest.getPhone())
-                || Strings.isNullOrEmpty(bookingRequest.getDestination())
-                || Strings.isNullOrEmpty(bookingRequest.getOrigin())
-                || Strings.isNullOrEmpty(bookingRequest.getPrice())) {
-            // Check date for validity.
-            return false;
-        }
-        return true;
+        return !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && bookingRequest.getNumRiders() <= MAX_RIDERS && bookingRequest.getNumRiders() >= 1
+                && !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && !Strings.isNullOrEmpty(bookingRequest.getName())
+                && !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && !Strings.isNullOrEmpty(bookingRequest.getPhone())
+                && !Strings.isNullOrEmpty(bookingRequest.getDestination())
+                && !Strings.isNullOrEmpty(bookingRequest.getOrigin())
+                && !Strings.isNullOrEmpty(bookingRequest.getPrice());
+    }
+
+    public static boolean validateBooking(Booking bookingRequest) {
+        return !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && bookingRequest.getNumRiders() <= MAX_RIDERS && bookingRequest.getNumRiders() >= 1
+                && !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && !Strings.isNullOrEmpty(bookingRequest.getName())
+                && !Strings.isNullOrEmpty(bookingRequest.getEmail())
+                && !Strings.isNullOrEmpty(bookingRequest.getPhone())
+                && !Strings.isNullOrEmpty(bookingRequest.getDestination())
+                && !Strings.isNullOrEmpty(bookingRequest.getOrigin())
+                && !Strings.isNullOrEmpty(bookingRequest.getPrice())
+                // Booking specific. Add more.
+                && !Strings.isNullOrEmpty(bookingRequest.getBookingID());
     }
 
     // Move to test utils once we have one :)

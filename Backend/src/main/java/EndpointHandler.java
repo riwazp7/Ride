@@ -76,4 +76,25 @@ public class EndpointHandler {
         communicationHandler.handleBookingConfirmation(booking);
         return true;
     }
+
+    public Object handleGetAllBookings(final Request request, final Response response) {
+        return gson.toJson(databaseManager.retrieveAll());
+    }
+
+    public boolean handleForceAddBooking(final Request request, final Response response) {
+        String requestBody = request.body();
+        try {
+            Booking booking = gson.fromJson(requestBody, Booking.class);
+            if (!BookingsUtil.validateBooking(booking)) {
+                logger.error("INVALID FORCE ADD BOOKING from client");
+                return false;
+            }
+            databaseManager.addBooking(booking);
+            return true;
+        } catch (JsonSyntaxException e) {
+            logger.error("Malformed new booking request JSON from client: ", e);
+            response.status(400);
+        }
+        return false;
+    }
 }

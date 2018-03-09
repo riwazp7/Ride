@@ -19,6 +19,16 @@ public class EndpointManager {
      */
     private static final String PATH_CHECK_BOOKING_STATUS = "/status";
 
+
+    ////// ******** Vendor Side *********** ///////////
+
+    private static final String PATH_GET_ALL_BOOKINGS = "/get/all";
+
+
+    private static final String PATH_REMOVE_BOOKING = "/del";
+
+    private static final String PATH_FORCE_ADD_BOOKING = "/force/new";
+
     /**
      * HTTP
      */
@@ -55,6 +65,8 @@ public class EndpointManager {
 
         Spark.put(PATH_CONFIRM_BOOKING, endpointHandler::handleConfirmBooking);
         logger.info("Exposed CONFIRM BOOKING Endpoint");
+
+        Spark.put(PATH_GET_ALL_BOOKINGS, endpointHandler::handleGetAllBookings);
     }
 
     public static void main(String[] args) {
