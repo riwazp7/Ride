@@ -19,10 +19,12 @@ public class DatabaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseHandler.class.getSimpleName());
 
     private final MongoCollection<Document> bookingsCollection;
+    private final MongoCollection<Document> pricesCollection;
     private final Gson gson = new Gson();
 
-    public DatabaseHandler(MongoCollection<Document> bookingsCollection) {
+    public DatabaseHandler(MongoCollection<Document> bookingsCollection, MongoCollection<Document> pricesCollection) {
         this.bookingsCollection = bookingsCollection;
+        this.pricesCollection = pricesCollection;
     }
 
     /**
@@ -79,6 +81,14 @@ public class DatabaseHandler {
                 "Delete request for ID:%s, email:%s was NOT acknowledged by the database",
                 bookingID,
                 email));
+        return false;
+    }
+
+    public String readPriceList() {
+        return "";
+    }
+
+    public boolean setPrices() {
         return false;
     }
 }

@@ -21,8 +21,6 @@ public class CommunicationHandler {
     private static final String bookingsConfirmationEmailTemplate = "%s";
     private static final String bookingRequestSuccessfulTemplate = "%s";
 
-
-
     public void handleBookingRequestSuccessful(Booking booking) {
         String emailContent = String.format(bookingRequestSuccessfulTemplate, booking.getBookingID()); // and more
         try {
@@ -66,13 +64,15 @@ public class CommunicationHandler {
 
     public static void main(String[] args) throws Exception {
         Random random = new Random();
-        for (int i = 0; i < 20; i++) {
-            Thread.sleep(random.nextInt(60 * 1000));
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(i);
             sendEmail("iMpoRtAnt mEsSAGe",
-                    "????DO YOU HAVE A MINUTE TO TALK ABOUT JESUS CHRIST OUR SAVIOUR???? " + random.nextFloat() +
-                            " REPLY YES OR BE DOOMED FOREVER"
+                    "????DO YOU HAVE A MINUTE TO TALK ABOUT JESUS CHRIST OUR SAVIOUR???? "
+                            + random.nextFloat() +
+                            " REPLY YES PLZ"
                     + System.currentTimeMillis(),
-                    "nsa2@williams.edu");
+                    "@williams.edu");
+            Thread.sleep(random.nextInt(90 * 1000));
         }
     }
 
