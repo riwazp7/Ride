@@ -29,8 +29,8 @@ public class CommunicationHandler {
             this.bookingRequestSuccessfulTemplate = readEmailTemplate("");
             this.bookingsConfirmationEmailTemplate = readEmailTemplate("");
         } catch (IOException e) {
-            logger.error("Error reading email template: ", e);
-            throw new RuntimeException(e);
+            logger.error("Fatal error reading email template: ", e);
+            throw new FatalException(e);
         }
     }
 

@@ -19,7 +19,12 @@ public class DropServer {
                 logger.info("Started Drop Server");
                 Thread.sleep(Long.MAX_VALUE);
             } catch (RuntimeException e) {
-                logger.error("SERVER STOPPED WITH A FATAL ERROR", e);
+                if (e instanceof FatalException) {
+                    logger.error("SERVER CRASHED WITH A FATAL ERROR: ", e);
+                    break;
+                }
+                logger.error("Server stopped with an error: ", e);
+                logger.error("Attempting Restart");
             }
         }
     }
