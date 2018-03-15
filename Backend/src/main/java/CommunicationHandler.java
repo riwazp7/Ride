@@ -6,6 +6,11 @@ import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class CommunicationHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CommunicationHandler.class.getSimpleName());
@@ -16,8 +21,18 @@ public class CommunicationHandler {
     private static final String USER_NAME = "dropwebsitetest1";
     private static final String PASSWORD = "testtest!1"; // lol
 
-    private static final String bookingsConfirmationEmailTemplate = "%s";
-    private static final String bookingRequestSuccessfulTemplate = "%s";
+    private final String bookingsConfirmationEmailTemplate;
+    private final String bookingRequestSuccessfulTemplate;
+
+    public CommunicationHandler() {
+        try {
+            this.bookingRequestSuccessfulTemplate = readEmailTemplate("");
+            this.bookingsConfirmationEmailTemplate = readEmailTemplate("");
+        } catch (IOException e) {
+            logger.error("Error reading email template: ", e);
+            throw new RuntimeException(e);
+        }
+    }
 
     public void handleBookingRequestSuccessful(Booking booking) {
         String emailContent = String.format(bookingRequestSuccessfulTemplate, booking.getBookingID()); // and more
@@ -58,6 +73,10 @@ public class CommunicationHandler {
         email.setMsg(content);
         email.addTo(toAddress);
         email.send();
+    }
+
+    private static String readEmailTemplate(String templateName) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(templateName)), Charset.defaultCharset());
     }
 
     public static void main(String[] args) {

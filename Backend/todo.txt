@@ -1,3 +1,6 @@
 1) Sharing Rides...
-2) Security for vendor apis
-3) Spam prevention: Something like IP logging and blacklisting maybe.
+2) Store/Read email templates.
+
+Maybes
+1) Security for vendor apis
+2) Spam prevention: Something like IP logging and blacklisting maybe.
