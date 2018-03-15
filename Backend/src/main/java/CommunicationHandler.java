@@ -62,18 +62,7 @@ public class CommunicationHandler {
         email.send();
     }
 
-    public static void main(String[] args) throws Exception {
-        Random random = new Random();
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(i);
-            sendEmail("iMpoRtAnt mEsSAGe",
-                    "????DO YOU HAVE A MINUTE TO TALK ABOUT JESUS CHRIST OUR SAVIOUR???? "
-                            + random.nextFloat() +
-                            " REPLY YES PLZ"
-                    + System.currentTimeMillis(),
-                    "@williams.edu");
-            Thread.sleep(random.nextInt(90 * 1000));
-        }
+    public static void main(String[] args) {
     }
 
 }

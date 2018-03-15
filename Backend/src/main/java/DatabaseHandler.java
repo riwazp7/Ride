@@ -30,6 +30,7 @@ public class DatabaseHandler {
     /**
      *
      * @param booking A valid booking with all required fields non-empty and non-null.
+     * TODO: Basic validation here? Like check for duplicate.
      */
     public void addBooking(Booking booking) {
         Document document = Document.parse(gson.toJson(booking));
@@ -78,7 +79,7 @@ public class DatabaseHandler {
             return true; // ?
         }
         logger.error(String.format(
-                "Delete request for ID:%s, email:%s was NOT acknowledged by the database",
+                "Delete request for ID:%s, email:%s was not acknowledged by the database",
                 bookingID,
                 email));
         return false;
