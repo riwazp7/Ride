@@ -28,7 +28,7 @@ public class CommunicationHandler {
         try {
             this.bookingRequestSuccessfulTemplate = readEmailTemplate("");
             this.bookingsConfirmationEmailTemplate = readEmailTemplate("");
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Fatal error reading email template: ", e);
             throw new FatalException(e);
         }
@@ -44,7 +44,7 @@ public class CommunicationHandler {
                             "Sending booking confirmation email to %s for %s failed with exception",
                             booking.getEmail(),
                             booking.getBookingID()),
-                    e); // Error?
+                    e); // Send email to bob to notify.
         }
     }
 
@@ -80,6 +80,7 @@ public class CommunicationHandler {
     }
 
     public static void main(String[] args) {
+
     }
 
 }
