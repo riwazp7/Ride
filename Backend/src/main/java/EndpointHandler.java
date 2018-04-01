@@ -11,6 +11,13 @@ import spark.Request;
 import spark.Response;
 
 import javax.annotation.Nullable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class EndpointHandler {
 
@@ -20,9 +27,17 @@ public class EndpointHandler {
     private final DatabaseHandler databaseHandler;
     private final CommunicationHandler communicationHandler;
 
+    private String priceList;
+
     EndpointHandler(DatabaseHandler databaseHandler, CommunicationHandler communicationHandler) {
         this.databaseHandler = databaseHandler;
         this.communicationHandler = communicationHandler;
+        try {
+            this.priceList = readPriceList();
+        } catch (Exception e) {
+            logger.error("Error reading stored price list", e);
+            throw new FatalException(e);
+        }
     }
 
     @Nullable
@@ -106,5 +121,25 @@ public class EndpointHandler {
             return false;
         }
         return databaseHandler.deleteBooking(bookingID, email);
+    }
+
+    public boolean handleUpdatePrices(final Request request, final Response response) {
+        String requestBody = request.body();
+        try {
+            File priceList = new File(Params.PRICE_LIST_FILE_PATH);
+            Files.write(Paths.get(Params.PRICE_LIST_FILE_PATH), requestBody.getBytes(), StandardOpenOption.WRITE);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error writing to prices file", e);
+        }
+        return false;
+    }
+
+    public Object handleGetPriceList(final Request request, final Response response) {
+
+    }
+
+    private static String readPriceList() throws IOException {
+        return new String(Files.readAllBytes(Paths.get(Params.PRICE_LIST_FILE_PATH)), Charset.defaultCharset());
     }
 }
