@@ -9,7 +9,7 @@ public class EndpointManager {
     private static final int PORT = 8989; // Accept as config?
     private static final int MAX_THREADS = 6; // Accept as config.
 
-    private static final String PATH_NEW_BOOKING = "/new";
+    private static final String PATH_NEW_BOOKING = "/new/booking";
 
     private static final String PATH_CHECK_BOOKING_STATUS = "/status";
 
@@ -24,7 +24,9 @@ public class EndpointManager {
 
     private static final String PATH_CONFIRM_BOOKING = "/confirm";
 
-    private static final String PATH_ADD_PRICE_LIST = "/price";
+    private static final String PATH_ADD_PRICE_LIST = "/new/prices";
+
+    private static final String PATH_GET_PRICE_LIST = "get/prices";
 
 
 
@@ -65,6 +67,8 @@ public class EndpointManager {
         Spark.post(PATH_FORCE_ADD_BOOKING, endpointHandler::handleForceAddBooking);
 
         Spark.post(PATH_ADD_PRICE_LIST, endpointHandler::handleUpdatePrices);
+
+        Spark.post(PATH_GET_PRICE_LIST, endpointHandler::handleGetPriceList);
     }
 
     public static void main(String[] args) {

@@ -11,8 +11,6 @@ import spark.Request;
 import spark.Response;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -126,8 +124,8 @@ public class EndpointHandler {
     public boolean handleUpdatePrices(final Request request, final Response response) {
         String requestBody = request.body();
         try {
-            File priceList = new File(Params.PRICE_LIST_FILE_PATH);
             Files.write(Paths.get(Params.PRICE_LIST_FILE_PATH), requestBody.getBytes(), StandardOpenOption.WRITE);
+            priceList = requestBody; // Cache price list.
             return true;
         } catch (Exception e) {
             logger.error("Error writing to prices file", e);
@@ -136,7 +134,7 @@ public class EndpointHandler {
     }
 
     public Object handleGetPriceList(final Request request, final Response response) {
-
+        return priceList;
     }
 
     private static String readPriceList() throws IOException {
