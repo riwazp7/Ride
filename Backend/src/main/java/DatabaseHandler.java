@@ -84,12 +84,4 @@ public class DatabaseHandler {
                 email));
         return false;
     }
-
-    public String readPriceList() {
-        return "";
-    }
-
-    public boolean setPrices() {
-        return false;
-    }
 }
