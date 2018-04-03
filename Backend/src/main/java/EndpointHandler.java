@@ -2,6 +2,7 @@ import booking.Booking;
 import booking.BookingRequest;
 import booking.BookingResponse;
 import booking.BookingsUtil;
+import booking.PricesList;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -123,6 +124,17 @@ public class EndpointHandler {
 
     public boolean handleUpdatePrices(final Request request, final Response response) {
         String requestBody = request.body();
+        // Try parsing the JSON received as a price list object to validate.
+        try {
+            if (!BookingsUtil.validatePricesList(gson.fromJson(requestBody, PricesList.class))) {
+                logger.info(String.format("Invalid price list %s ignored", requestBody));
+                return false;
+            }
+        } catch (JsonSyntaxException e) {
+            logger.error(String.format("Invalid price list JSON format received for update: %s", requestBody), e);
+            return false;
+        }
+
         try {
             Files.write(Paths.get(Params.PRICE_LIST_FILE_PATH), requestBody.getBytes(), StandardOpenOption.WRITE);
             priceList = requestBody; // Cache price list.
@@ -137,7 +149,12 @@ public class EndpointHandler {
         return priceList;
     }
 
-    private static String readPriceList() throws IOException {
-        return new String(Files.readAllBytes(Paths.get(Params.PRICE_LIST_FILE_PATH)), Charset.defaultCharset());
+    private String readPriceList() throws IOException {
+        String storedPriceList
+                = new String(Files.readAllBytes(Paths.get(Params.PRICE_LIST_FILE_PATH)), Charset.defaultCharset());
+        if(!BookingsUtil.validatePricesList(gson.fromJson(storedPriceList, PricesList.class))) {
+            throw new FatalException(String.format("Price list read from file is invalid: %s", storedPriceList));
+        }
+        return storedPriceList;
     }
 }

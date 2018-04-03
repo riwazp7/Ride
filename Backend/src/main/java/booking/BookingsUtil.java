@@ -2,6 +2,9 @@ package booking;
 
 import com.google.common.base.Strings;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
 
 public class BookingsUtil {
 
@@ -39,6 +42,22 @@ public class BookingsUtil {
                 && !Strings.isNullOrEmpty(bookingRequest.getPrice())
                 // Booking specific. Add more.
                 && !Strings.isNullOrEmpty(bookingRequest.getBookingID());
+    }
+
+    public static boolean validatePricesList(PricesList pricesList) {
+        List<String[]> list = pricesList.getPriceList();
+        if (!list.isEmpty()) {
+            for (String[] route : list) {
+                if (route.length != 3
+                        || !StringUtils.isNumeric(route[2])
+                        || Strings.isNullOrEmpty(route[0])
+                        || Strings.isNullOrEmpty(route[1])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     // Move to test utils once we have one :)
