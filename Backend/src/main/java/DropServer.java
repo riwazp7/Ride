@@ -1,3 +1,4 @@
+import org.apache.commons.mail.EmailException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -21,6 +22,7 @@ public class DropServer {
             } catch (RuntimeException e) {
                 if (e instanceof FatalException) {
                     logger.error("SERVER CRASHED WITH A FATAL ERROR: ", e);
+                    sendCrashNotification(e.toString());
                     break;
                 }
                 logger.error("Server stopped with an error: ", e);
@@ -46,5 +48,15 @@ public class DropServer {
 
         // Expose as the last step
         endpointManager.exposeEndpoints();
+    }
+
+    private static void sendCrashNotification(String info) {
+        for (String toAddress : Params.CRASH_NOTIFICATION_EMAILS) {
+            try {
+                CommunicationHandler.sendEmail("DROP SERVER HAS CRASHED", info, toAddress);
+            } catch (EmailException e) {
+                logger.error(String.format("Sending crash notification to %s failed", toAddress), e);
+            }
+        }
     }
 }

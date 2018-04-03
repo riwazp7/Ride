@@ -62,7 +62,7 @@ public class CommunicationHandler {
         }
     }
 
-    private static void sendEmail(String subject, String content, String toAddress) throws EmailException {
+    public static void sendEmail(String subject, String content, String toAddress) throws EmailException {
         Email email = new SimpleEmail();
         email.setSmtpPort(SMTP_PORT);
         email.setHostName(EMAIL_HOST);
