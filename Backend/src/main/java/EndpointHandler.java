@@ -34,8 +34,8 @@ public class EndpointHandler {
         try {
             this.priceList = readPriceList();
         } catch (Exception e) {
-            logger.error("Error reading stored price list", e);
-            throw new FatalException(e);
+            logger.warn("Error reading stored price list", e);
+            // Separate corrupt prices list from prices list not present.
         }
     }
 

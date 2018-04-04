@@ -5,6 +5,8 @@ import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+
 public class DropServer {
 
     private final static Logger logger = LoggerFactory.getLogger(DropServer.class.getSimpleName());
@@ -22,7 +24,7 @@ public class DropServer {
             } catch (RuntimeException e) {
                 if (e instanceof FatalException) {
                     logger.error("SERVER CRASHED WITH A FATAL ERROR: ", e);
-                    sendCrashNotification(e.toString());
+                    sendCrashNotification(Arrays.toString(e.getStackTrace()));
                     break;
                 }
                 logger.error("Server stopped with an error: ", e);
