@@ -136,7 +136,7 @@ public class EndpointHandler {
         }
 
         try {
-            Files.write(Paths.get(Params.PRICE_LIST_FILE_PATH), requestBody.getBytes(), StandardOpenOption.WRITE);
+            Files.write(Paths.get(Params.PRICE_LIST_FILE_PATH), requestBody.getBytes(), StandardOpenOption.CREATE);
             priceList = requestBody; // Cache price list.
             return true;
         } catch (Exception e) {

@@ -4,8 +4,6 @@ import com.google.common.base.Strings;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.List;
-
 public class BookingsUtil {
 
     // Display message in the ui to call bob instead for rides with larger # of riders.
@@ -45,8 +43,11 @@ public class BookingsUtil {
     }
 
     public static boolean validatePricesList(PricesList pricesList) {
-        List<String[]> list = pricesList.getPriceList();
-        if (!list.isEmpty()) {
+        if (pricesList == null) {
+            return false;
+        }
+        String[][] list = pricesList.getPriceList();
+        if (list != null && list.length != 0) {
             for (String[] route : list) {
                 if (route.length != 3
                         || !StringUtils.isNumeric(route[2])
