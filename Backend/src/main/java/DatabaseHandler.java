@@ -19,12 +19,10 @@ public class DatabaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseHandler.class.getSimpleName());
 
     private final MongoCollection<Document> bookingsCollection;
-    private final MongoCollection<Document> pricesCollection;
     private final Gson gson = new Gson();
 
-    public DatabaseHandler(MongoCollection<Document> bookingsCollection, MongoCollection<Document> pricesCollection) {
+    public DatabaseHandler(MongoCollection<Document> bookingsCollection) {
         this.bookingsCollection = bookingsCollection;
-        this.pricesCollection = pricesCollection;
     }
 
     /**

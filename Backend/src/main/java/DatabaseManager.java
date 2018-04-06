@@ -11,17 +11,14 @@ public class DatabaseManager {
     private static final String MONGO_DB_NAME = "DB_DROP";
 
     private static final String MONGO_BOOKINGS_COLLECTION = "BOOKINGS_COLLECTION";
-    private static final String MONGO_PRICE_COLLECTION = "PRICE_COLLECTION";
 
     private final DatabaseHandler databaseHandler;
 
     DatabaseManager() {
         MongoDatabase database = new MongoClient("localhost").getDatabase(MONGO_DB_NAME);
         createCollectionIfNotPresent(database, MONGO_BOOKINGS_COLLECTION);
-        createCollectionIfNotPresent(database, MONGO_PRICE_COLLECTION);
         this.databaseHandler = new DatabaseHandler(
-                database.getCollection(MONGO_BOOKINGS_COLLECTION),
-                database.getCollection(MONGO_PRICE_COLLECTION));
+                database.getCollection(MONGO_BOOKINGS_COLLECTION));
     }
 
     public DatabaseHandler getDatabaseHandler() {
