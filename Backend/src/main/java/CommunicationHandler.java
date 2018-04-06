@@ -15,12 +15,6 @@ public class CommunicationHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(CommunicationHandler.class.getSimpleName());
 
-    private static final String EMAIL_HOST = "smtp.googlemail.com";
-    private static final int SMTP_PORT = 465;
-    private static final String EMAIL_FROM = "dropwebsitetest1@gmail.com"; // is this needed?
-    private static final String USER_NAME = "dropwebsitetest1";
-    private static final String PASSWORD = "testtest!1"; // lol
-
     private final String bookingsConfirmationEmailTemplate;
     private final String bookingRequestSuccessfulTemplate;
 
@@ -64,11 +58,11 @@ public class CommunicationHandler {
 
     public static void sendEmail(String subject, String content, String toAddress) throws EmailException {
         Email email = new SimpleEmail();
-        email.setSmtpPort(SMTP_PORT);
-        email.setHostName(EMAIL_HOST);
-        email.setAuthenticator(new DefaultAuthenticator(USER_NAME, PASSWORD));
+        email.setSmtpPort(Params.SMTP_PORT);
+        email.setHostName(Params.EMAIL_HOST);
+        email.setAuthenticator(new DefaultAuthenticator(Params.USER_NAME, Params.PASSWORD));
         email.setSSLOnConnect(true);
-        email.setFrom(EMAIL_FROM);
+        email.setFrom(Params.EMAIL_FROM);
         email.setSubject(subject);
         email.setMsg(content);
         email.addTo(toAddress);
